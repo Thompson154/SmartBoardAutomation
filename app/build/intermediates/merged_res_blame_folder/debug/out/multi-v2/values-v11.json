@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/plandaeta/Downloads/UPBGame2023/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v11/values-v11.xml",
+            "outputFile": "edu.upb.lp.genericgame.app-mergeDebugResources-29:/values-v11/values-v11.xml",
             "map": [
                 {
                     "source": "/Users/plandaeta/Downloads/UPBGame2023/app/src/main/res/values-v11/styles.xml",
@@ -19,7 +19,7 @@
                         "startOffsets": "55",
                         "endLines": "4",
                         "endColumns": "12",
-                        "endOffsets": "187"
+                        "endOffsets": "138"
                     }
                 }
             ]

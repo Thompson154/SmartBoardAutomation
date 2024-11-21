@@ -2,6 +2,7 @@ package edu.upb.lp.progra.bugWorld;
 
 import edu.upb.lp.core.adapter.AndroidLibrary;
 import edu.upb.lp.core.adapter.AppConnector;
+import edu.upb.lp.genericgame.R;
 
 public class BugWorldUI implements AppConnector {
 	private BugWorld world;
@@ -63,15 +64,17 @@ public class BugWorldUI implements AppConnector {
 	public void initialiseInterface() {
 		// General configuration
 
+		gui.setDynamicTitle("Bug World");
+		gui.setToolbarColors(R.color.aqua, R.color.blue);
 		gui.configureScreen(world.getSizeVertical(), world.getSizeHorizontal(),
-				1, 1, true, 0.3);
+				1, 1, true, 0.4);
 
 		// Text fields
 		// Score
 		gui.addTextField("Score", "Score: " + world.getScore(), 15, 20);
 
 		// Money
-		gui.addTextField("Money", "Money: " + world.getMoney(), 15, 20);
+		gui.addTextField("MoneyP", "Money: " + world.getMoney(), 15, 20);
 
 		// Food price
 		gui.addTextField("Food price", "Food price: " + world.getFoodPrice(),
@@ -98,7 +101,7 @@ public class BugWorldUI implements AppConnector {
 		gui.updateTextField("Score", "Score: " + world.getScore());
 
 		// Money
-		gui.updateTextField("Money", "Money: " + world.getMoney());
+		gui.updateTextField("MoneyP", "Money: " + world.getMoney());
 
 		// Food price
 		gui.updateTextField("Food price", "Food price: " + world.getFoodPrice());

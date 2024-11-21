@@ -1,8 +1,8 @@
 package edu.upb.lp.progra.bugWorld;
 
 public class BugWorld {
-	private int sizeHorizontal = 10;
-	private int sizeVertical = 8;
+	private int sizeHorizontal = 8;
+	private int sizeVertical = 10;
 	private Cell[][] cells = new Cell[sizeVertical][sizeHorizontal];
 
 	private BugWorldUI ui;
