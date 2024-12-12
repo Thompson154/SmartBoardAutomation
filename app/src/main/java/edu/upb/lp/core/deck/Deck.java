@@ -1,32 +1,25 @@
 package edu.upb.lp.core.deck;
 
-import android.content.Context;
-
-import androidx.viewpager2.widget.ViewPager2;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Deck {
-    List<Card> cards;
-    private final Context context;
+    private final ArrayList<Card> cards;
+    private String closeTitle;
 
-    public Deck(Context context) {
+    public Deck(String closeTitle) {
         this.cards = new ArrayList<>();
-        this.context = context;
+        this.closeTitle = closeTitle;
     }
 
-    public void addCardScreen(String title, String description, int imageResourceId ) {
-        cards.add(new CardScreen(title, description, imageResourceId));
+    public void addCard(String title, String description, String image) {
+        cards.add(new CardScreen(title, description, image));
     }
 
-    public void setCardStart(String buttonText, Runnable onStart) {
-        cards.add(new CardStart(buttonText, onStart));
+    public ArrayList<Card> getCards() {
+        ArrayList<Card> deckComplete = new ArrayList<>();
+        deckComplete.addAll(cards);
+        Card closeCard = new CardStart(this.closeTitle);
+        deckComplete.add(closeCard);
+        return deckComplete;
     }
-
-    public void setupViewPager(ViewPager2 viewPager) {
-        CarouselAdapter adapter = new CarouselAdapter(context, cards);
-        viewPager.setAdapter(adapter);
-    }
-    
 }

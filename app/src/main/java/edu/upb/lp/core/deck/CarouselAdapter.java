@@ -1,5 +1,7 @@
 package edu.upb.lp.core.deck;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 
 import java.util.List;
@@ -26,6 +27,11 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
         this.context = context;
         this.cards = cards;
     }
+    // TODO: Util o Helper?
+    private int getSourceId(Activity activity, String sourceName) {
+        @SuppressLint("DiscouragedApi") int id = activity.getResources().getIdentifier(sourceName, "drawable", activity.getPackageName());
+        return id;
+    }
 
     @NonNull
     @Override
@@ -37,19 +43,21 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Card card = cards.get(position);
-
-        if (card instanceof CardScreen) {
+        if (position != cards.size() - 1) {
             CardScreen cardScreen = (CardScreen) card;
             holder.title.setText(cardScreen.getTitle());
             holder.description.setText(cardScreen.getDescription());
-            holder.image.setImageResource(cardScreen.getImageResourceId());
+            int idImageSource = getSourceId((Activity) holder.itemView.getContext(), cardScreen.getImage());
+            holder.image.setImageResource(idImageSource);
             holder.button.setVisibility(View.GONE);
-        } else if (card instanceof CardStart) {
+        } else {
             CardStart cardStart = (CardStart) card;
             holder.description.setText("");
             holder.button.setText(cardStart.getButtonText());
             holder.button.setVisibility(View.VISIBLE);
-            holder.button.setOnClickListener(v -> cardStart.getOnStart().run());
+            holder.button.setOnClickListener(v -> {
+                ((Activity) holder.itemView.getContext()).finish();
+            });
         }
     }
 

@@ -1,4 +1,4 @@
-package edu.upb.lp.core.deck;
+package edu.upb.lp.core.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import edu.upb.lp.core.activities.AndroidGameActivity;
+import java.util.List;
+
+import edu.upb.lp.core.deck.Card;
+import edu.upb.lp.core.deck.CarouselAdapter;
 import edu.upb.lp.genericgame.R;
 
 public class DeckActivity extends AppCompatActivity {
@@ -17,20 +20,14 @@ public class DeckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck);
 
-        Deck deck = new Deck(this);
+        // Catching data from previous activity
+        Intent intent = getIntent();
+        List<Card> cards = intent.getParcelableArrayListExtra("DECK");
 
-        deck.addCardScreen(
-                "Features",
-                "Here are some cool features.",
-                R.drawable.bugs_old_bug
-        );
-        deck.setCardStart("Let's Start", () -> {
-            Intent intent = new Intent(this, AndroidGameActivity.class);
-            startActivity(intent);
-        });
-
+        // Configuring ViewPager2 in order to show correctly data from cards
         ViewPager2 viewPager = findViewById(R.id.viewPager);
-        deck.setupViewPager(viewPager);
+        CarouselAdapter adapter = new CarouselAdapter(this, cards);
+        viewPager.setAdapter(adapter);
     }
 }
 
