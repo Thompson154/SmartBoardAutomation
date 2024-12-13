@@ -1,6 +1,7 @@
 package edu.upb.lp.core.deck;
 
 import java.util.ArrayList;
+import edu.upb.lp.core.deck.exceptions.CardPositionOutOfBoundsException;
 
 public class Deck {
     private final ArrayList<Card> cards;
@@ -21,5 +22,25 @@ public class Deck {
         Card closeCard = new CardStart(this.closeTitle);
         deckComplete.add(closeCard);
         return deckComplete;
+    }
+
+    public void clear() {
+        cards.clear();
+    }
+    public void remove(int position) throws CardPositionOutOfBoundsException {
+        if (position < 0 || position >= cards.size()) {
+            throw new CardPositionOutOfBoundsException("Index " + position + " is out of bounds.");
+        }
+        cards.remove(position);
+    }
+
+    public void removeLastCard() {
+        if (!cards.isEmpty()) {
+            cards.remove(cards.size() - 1);
+        }
+    }
+
+    public void setCloseTitle(String closeTitle) {
+        this.closeTitle = closeTitle;
     }
 }
