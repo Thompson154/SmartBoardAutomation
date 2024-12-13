@@ -38,6 +38,7 @@ public class BugWorldUI implements AppConnector {
             } else if (name.equals("Show Deck")) {
                 Deck deck =  new Deck("Presiona START");
                 deck.addCard("PANTALLA 1", "Esta es la pantalla 1", "bugs_dead_bug");
+                deck.addCard("PANTALLA 2", "Esta es la pantalla 2", "bugs_dead_bug");
 				gui.showDeck(deck);
             }
             updateInterface();
