@@ -27,9 +27,9 @@ public class Deck {
     public void clear() {
         cards.clear();
     }
-    public void remove(int position) throws CardPositionOutOfBoundsException {
+    public void remove(int position) {
         if (position < 0 || position >= cards.size()) {
-            throw new CardPositionOutOfBoundsException("Index " + position + " is out of bounds.");
+            throw new CardPositionOutOfBoundsException("Card position " + position + " is out of bounds.");
         }
         cards.remove(position);
     }
