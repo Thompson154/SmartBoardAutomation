@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#2196F3">
+    android:background="#FFFFFF">
 
     <!-- Contenedor de la imagen, ocupa el 40% de la pantalla -->
     <ImageView
@@ -33,7 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Título"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000
+"
                 android:textSize="50sp"
                 android:textStyle="bold" />
 
@@ -43,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Descripción de la imagen"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000
+"
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
