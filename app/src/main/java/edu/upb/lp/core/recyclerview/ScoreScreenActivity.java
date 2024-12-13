@@ -2,6 +2,7 @@ package edu.upb.lp.core.recyclerview;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -22,27 +23,30 @@ import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ScoreScreenActivity extends AppCompatActivity{
     private List<Score> listScores = new ArrayList<>();
     private static final String PREFS_NAME = "ScorePrefs";
     private static final String SCORES_KEY = "ScoresList";
-    private ScoreItemAdapter adapter;
+    private ScoreItemAdapter scoreAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_score_screen);
-        loadScoresFromPreferences();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.score_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        startScores();
+        showScores();
     }
 
     private void loadScoresFromPreferences() {
@@ -56,10 +60,17 @@ public class ScoreScreenActivity extends AppCompatActivity{
         }
     }
 
-    private void startScores(){
+    private void showScores() {
+        loadScoresFromPreferences();
         RecyclerView recyclerView = findViewById(R.id.score_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ScoreItemAdapter(listScores));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Collections.sort(listScores, Comparator.comparingInt(Score::getScore).reversed());
+        }
+        List<Score> top10Scores = listScores.size() > 10 ? listScores.subList(0, 10) : listScores;
+        scoreAdapter = new ScoreItemAdapter(top10Scores);
+        //TODO: Save only top 10 by memory
+        recyclerView.setAdapter(scoreAdapter);
     }
 
 }

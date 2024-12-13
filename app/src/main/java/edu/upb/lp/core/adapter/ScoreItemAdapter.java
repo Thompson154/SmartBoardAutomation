@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
 import edu.upb.lp.genericgame.R;
@@ -16,9 +17,18 @@ import edu.upb.lp.core.model.Score;
 public class ScoreItemAdapter extends RecyclerView.Adapter<ScoreItemAdapter.ScoreItemAdapterViewHolder> {
 
     private final List<Score> scoreList;
+    private List<Score> scores;
 
     public ScoreItemAdapter(List<Score> scoreList) {
         this.scoreList = scoreList;
+    }
+    public void setScores(List<Score> scores) {
+        Collections.sort(scores, (o1, o2) -> o2.getScore() - o1.getScore());
+        if (scores.size() > 10) {
+            this.scores = scores.subList(0, 10);
+        } else {
+            this.scores = scores;
+        }
     }
 
     @NonNull
