@@ -468,10 +468,10 @@ public class AndroidGameActivity extends AppCompatActivity implements AndroidLib
  
     @Override
     public void showDeck(Deck deck) {
-        Intent deckIntent =  new Intent(getApplicationContext(), DeckActivity.class);
+        Intent deckIntent = new Intent(getApplicationContext(), DeckActivity.class);
         deckIntent.putParcelableArrayListExtra("DECK", deck.getCards());
         startActivity(deckIntent);
-
+    }
     private void loadScoresFromPreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String json = preferences.getString(SCORES_KEY, null);
