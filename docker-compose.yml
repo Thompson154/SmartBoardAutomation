@@ -2,13 +2,15 @@ version: '3.8'
 
 services:
   jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins-server
-    restart: unless-stopped
+    build: .
+    container_name: jenkins-android
     ports:
       - "8080:8080"
+      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
+      - android_sdk:/opt/android-sdk
 
 volumes:
   jenkins_home:
+  android_sdk:
