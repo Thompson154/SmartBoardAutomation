@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/joackagui/SmartBoard.git'
+                git 'https://github.com/PaulLandaeta/SmartBoard.git'
             }
         }
 
